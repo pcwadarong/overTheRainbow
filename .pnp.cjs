@@ -31,12 +31,14 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["@vitejs/plugin-react", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:4.3.3"],\
+          ["autoprefixer", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:10.4.20"],\
           ["eslint", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:9.14.0"],\
           ["eslint-plugin-react-hooks", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:5.0.0"],\
           ["eslint-plugin-react-refresh", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:0.4.14"],\
           ["firebase", "npm:11.0.1"],\
           ["framer-motion", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:11.11.11"],\
           ["globals", "npm:15.12.0"],\
+          ["postcss", "npm:8.4.47"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:18.3.1"],\
@@ -2656,6 +2658,34 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["autoprefixer", [\
+      ["npm:10.4.20", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/autoprefixer-npm-10.4.20-dd5fd05d27-10c0.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "npm:10.4.20"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:10.4.20", {\
+        "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-1ff8eceb65/4/AppData/Local/Yarn/Berry/cache/autoprefixer-npm-10.4.20-dd5fd05d27-10c0.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:10.4.20"],\
+          ["@types/postcss", null],\
+          ["browserslist", "npm:4.24.2"],\
+          ["caniuse-lite", "npm:1.0.30001679"],\
+          ["fraction.js", "npm:4.3.7"],\
+          ["normalize-range", "npm:0.1.2"],\
+          ["picocolors", "npm:1.1.1"],\
+          ["postcss", "npm:8.4.47"],\
+          ["postcss-value-parser", "npm:4.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/postcss",\
+          "postcss"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["balanced-match", [\
       ["npm:1.0.2", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/balanced-match-npm-1.0.2-a53c126459-10c0.zip/node_modules/balanced-match/",\
@@ -3403,6 +3433,15 @@ const RAW_RUNTIME_STATE =
           ["foreground-child", "npm:3.3.0"],\
           ["cross-spawn", "npm:7.0.5"],\
           ["signal-exit", "npm:4.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["fraction.js", [\
+      ["npm:4.3.7", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/fraction.js-npm-4.3.7-c2c7e95a8e-10c0.zip/node_modules/fraction.js/",\
+        "packageDependencies": [\
+          ["fraction.js", "npm:4.3.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4230,6 +4269,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["normalize-range", [\
+      ["npm:0.1.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/normalize-range-npm-0.1.2-bec5e259e2-10c0.zip/node_modules/normalize-range/",\
+        "packageDependencies": [\
+          ["normalize-range", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["object-assign", [\
       ["npm:4.1.1", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/object-assign-npm-4.1.1-1004ad6dec-10c0.zip/node_modules/object-assign/",\
@@ -4272,12 +4320,14 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["@vitejs/plugin-react", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:4.3.3"],\
+          ["autoprefixer", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:10.4.20"],\
           ["eslint", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:9.14.0"],\
           ["eslint-plugin-react-hooks", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:5.0.0"],\
           ["eslint-plugin-react-refresh", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:0.4.14"],\
           ["firebase", "npm:11.0.1"],\
           ["framer-motion", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:11.11.11"],\
           ["globals", "npm:15.12.0"],\
+          ["postcss", "npm:8.4.47"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:3c5652cbd681626f11ced4291585871eab795be7acc78f42f0e224e6531505f7b8e8ed13dc488617a28e0053a1a4e4d0acaca0da9149bef71b4cd5dba9677e1a#npm:18.3.1"],\

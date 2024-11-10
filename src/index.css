@@ -26,12 +26,11 @@
     margin: 0;
     display: flex;
     place-items: center;
-    width: 100vw;
-    height: 100vh;
   }
 
   button {
-    padding: 0.6em 1.2em;
+    background: transparent;
+    border: none;
   }
 
   li,
