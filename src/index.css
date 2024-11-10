@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Suit';
+  src: url('/suit-regular.OTF') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Suit';
+  src: url('/suit-semibold.OTF') format('opentype');
+  font-weight: 600;
+}
+
+@layer base {
+  :root {
+    --primary-color: #3490dc;
+    --secondary-color: #ffed4a;
+  }
+
+  body {
+    font-family: 'Suit', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  button {
+    padding: 0.6em 1.2em;
+  }
+}
+
+@layer components {
+  .font-semibold {
+    font-family: 'Suit', sans-serif;
+    font-weight: 600;
+  }
+}
