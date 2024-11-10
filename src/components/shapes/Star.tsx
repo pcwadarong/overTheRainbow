@@ -1,4 +1,4 @@
-import { ShapeProps } from "../../types/shape";
+import { ShapeProps } from "../../types";
 
 const StarIcon = ({
   color = '#ffffff',
