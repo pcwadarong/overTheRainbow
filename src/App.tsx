@@ -1,5 +1,3 @@
-//import { useState } from 'react'
-import './App.css'
 import AuroraBackground from './components/AuroraBackground';
 import Navigation from './components/Navigation';
 

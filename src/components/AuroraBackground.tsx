@@ -1,57 +1,36 @@
 import { motion } from 'framer-motion';
 
 interface AuroraBackgroundProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const AuroraBackground = ({ children }: AuroraBackgroundProps) => {
   return (
-    <main>
-            <div
-                className={
-                    'relative flex flex-col h-dvh items-center justify-center bg-zinc-50 dark:bg-zinc-900 text-slate-950 transition-bg'
-                }
-            >
-                <motion.div
-                    className="absolute inset-0 overflow-hidden"
-                    animate={{
-                        backgroundPosition: ['50% 50%', '60% 60%', '50% 50%'],
-                    }}
-                    transition={{
-                        duration: 10,
-                        ease: 'easeInOut',
-                        repeat: Infinity,
-                        repeatType: 'mirror',
-                    }}
-                >
-                    <div
-                        className={` 
-                            [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]
-                            [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)]
-                            [--aurora:repeating-linear-gradient(100deg,var(--blue-500)_10%,var(--indigo-300)_15%,var(--blue-300)_20%,var(--violet-200)_25%,var(--blue-400)_30%)]
-                            [background-image:var(--white-gradient),var(--aurora)]
-                            dark:[background-image:var(--dark-gradient),var(--aurora)]
-                            [background-size:300%,_200%]
-                            filter blur-[10px] invert dark:invert-0
-                            pointer-events-none absolute -inset-[10px] opacity-50 will-change-transform
-                            [mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]
-                        `}
-                    ></div>
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0.0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                        delay: 0.3,
-                        duration: 0.8,
-                        ease: 'easeInOut',
-                    }}
-                    className="relative flex flex-col items-center justify-center gap-12 sm:gap-14 max-w-lg md:max-w-3xl xl:max-w-6xl px-4"
-                >
-                    {children}
-                </motion.div>
-            </div>
-        </main>
+    <main className="relative w-screen h-screen flex justify-center items-center bg-green transition-bg">
+      <motion.div
+        className="absolute inset-0 overflow-hidden"
+        animate={{
+          backgroundPosition: ['50% 0%', '0% 0%'],
+        }}
+        transition={{
+          duration: 30,
+          ease: 'easeInOut',
+          repeat: Infinity,
+          repeatType: 'mirror',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4da9ff] to-transparent opacity-80 blur-[10px] bg-[length:80%]"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-tr from-[#ff88ef] to-transparent opacity-60 blur-[30px] bg-[length:100%]"></div>
+        <div className="absolute inset-0 bg-gradient-to-tl from-[#f8ffbd] to-transparent opacity-90 blur-[20px] bg-[length:100%]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4de1ff] to-transparent opacity-90 blur-[20px] bg-[length:20%]"></div>
+        <div className="absolute inset-0 bg-gradient-to-bl from-[#c3ffc9] to-transparent opacity-90 blur-[10px] bg-[length:120%]"></div> */}
+      </motion.div>
+
+      {/* 콘텐츠 */}
+      <div className="relative flex flex-col items-center justify-center">
+        {children}
+      </div>
+    </main>
   );
 };
 

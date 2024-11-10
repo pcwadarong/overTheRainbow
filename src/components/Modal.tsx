@@ -1,11 +1,8 @@
-import React from 'react';
-
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
 }
 
-const Modals = ({ isOpen, onClose }: ModalProps) => {
+const Modals = ({ onClose }: ModalProps) => {
     return (
         <div className="modal">
           <div className="modal-content">

@@ -8,6 +8,8 @@ module.exports = {
         font: '#464646',
         gray: '#B2B5C2',
         pink: '#ecc94b',
+        nav: '#77A3D8',
+        green: '#D8F7D7',
       },
     },
   },
