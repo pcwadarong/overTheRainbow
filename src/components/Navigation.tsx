@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CloudIcon from '../assets/Cloud.svg';
 import WriteIcon from '../assets/Write.svg';
 import SearchIcon from '../assets/Search.svg';
