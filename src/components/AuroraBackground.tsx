@@ -13,13 +13,13 @@ const AuroraBackground = ({ children }: AuroraBackgroundProps) => {
           className="absolute inset-0 bg-gradient-to-b from-[rgb(99,177,255)] to-transparent opacity-90 blur-[70px] bg-[length:200%]"
           style={{ borderRadius: '20% 50% 30% 50%' }}
           animate={{
-            scale: [1, 1.2, 1],
+            scale: [1, 1.3, 1],
             rotate: [0, 15, -15, 0],
             x: ['-50%', '-50%', '20%'],
             y: ['0%', '10%', '-10%'],
           }}
           transition={{
-            duration: 20,
+            duration: 10,
             ease: 'easeInOut',
             repeat: Infinity,
             repeatType: 'mirror',
@@ -30,13 +30,13 @@ const AuroraBackground = ({ children }: AuroraBackgroundProps) => {
           className="absolute inset-0 h-2/3 w-4/5 bg-gradient-to-tr from-[#ff88ef] to-transparent opacity-70 blur-[50px] bg-[length:120%]"
           style={{ borderRadius: '40% 30% 50% 60%' }}
           animate={{
-            scale: [1, 0.9, 1],
+            scale: [1, 0.8, 1],
             rotate: [0, -20, 20, 0],
             x: ['0%', '15%', '-15%'],
             y: ['0%', '-10%', '10%'],
           }}
           transition={{
-            duration: 25,
+            duration: 15,
             ease: 'easeInOut',
             repeat: Infinity,
             repeatType: 'mirror',
