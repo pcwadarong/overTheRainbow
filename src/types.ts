@@ -2,8 +2,13 @@ export interface ShapeProps {
     color: string;
     width: number;
     height: number;
+  }
+
+  export interface LetterBtnProps {
     id: string;
-    onClick: (id:string) => void;
+    size: number;
+    color: string;
+    onClick: (id: string) => void;
   }
 
   export interface LetterProps {

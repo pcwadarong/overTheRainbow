@@ -1,49 +1,44 @@
 import { ShapeProps } from "../../types";
+import { useMemo } from "react";
+import { parseGradient } from "../../utils/parseGradient";
 
 const CloudIcon = ({
-  color = '#ffffff',
+  color,
   width = 300,
   height = 300,
-  id,
-  onClick,
   ...props
-}: ShapeProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 343 343"
-    width={width}
-    height={height}
-    fill="none"
-    aria-label={`letter #${id}`}
-    role="img"
-    onClick={() => onClick(id)}
-    opacity="0.9"
-    {...props}
-  >
-    <path
-      d="M310.701 184.504C306.985 172.213 300.84 161.494 292.693 152.776C282.26 140.914 268.397 132.768 252.82 129.195C244.959 93.4659 222.95 67.7409 191.651 58.1655C157.637 47.5896 118.192 57.8796 93.4674 83.7475C71.7441 106.471 64.5983 137.77 73.0303 171.07C44.447 178.073 30.2983 201.94 28.7262 224.663C28.5833 226.235 28.5833 227.665 28.5833 229.094C28.5833 255.962 46.162 286.118 85.3212 288.976H233.669C253.963 288.976 273.4 281.401 288.263 267.824C311.558 247.387 320.133 215.517 310.701 184.504Z"
-      fill={color}
-    />
-    <path
-      d="M309.983 184.721L309.983 184.722C319.335 215.47 310.829 247.029 287.768 267.26L287.763 267.265L287.757 267.27C273.032 280.721 253.776 288.226 233.669 288.226H85.3487C46.6781 285.39 29.3333 255.646 29.3333 229.094C29.3333 227.661 29.3337 226.265 29.4731 224.731L29.4738 224.723L29.4744 224.715C31.0287 202.249 45.0042 178.708 73.2088 171.798L73.9429 171.618L73.7574 170.886C65.3804 137.803 72.4869 106.78 94.0096 84.2658L94.0096 84.2657C118.539 58.6022 157.688 48.3909 191.428 58.8816L191.432 58.8826C222.434 68.3673 244.276 93.8504 252.087 129.356L252.189 129.82L252.652 129.926C268.081 133.465 281.804 141.531 292.13 153.272L292.138 153.28L292.145 153.288C300.209 161.918 306.299 172.535 309.983 184.721Z"
-      stroke="url(#paint0_linear_759_615)"
-      strokeOpacity="0.2"
-      strokeWidth="1.5"
-    />
-    <defs>
-      <linearGradient
-        id="paint0_linear_759_615"
-        x1="171.525"
-        y1="54.0547"
-        x2="171.525"
-        y2="288.976"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stopColor="#0015D7" />
-        <stop offset="1" stopColor="#FCFFA1" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
+}: ShapeProps) => {
+  const gradientId = useMemo(() => `gradient-${Math.random().toString(36).substr(2, 9)}`, []);
+  const gradientStops = parseGradient(color);
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 274 225"
+      width={width}
+      height={height}
+      fill="none"
+      role="img"
+      opacity="0.9"
+      {...props}
+    >
+      <defs>
+       <linearGradient id={gradientId} gradientUnits="userSpaceOnUse">
+         {gradientStops.map((stopColor, index) => (
+            <stop
+              key={index}
+              offset={`${(index / (gradientStops.length - 1)) * 100}%`}
+              stopColor={stopColor}
+            />
+          ))}
+        </linearGradient>
+      </defs>
+      <path
+        d="M269.567 124.646C266.017 112.902 260.145 102.66 252.361 94.3298C242.392 82.9955 229.146 75.2116 214.261 71.7976C206.75 37.6579 185.72 13.0773 155.814 3.92789C123.313 -6.17746 85.6224 3.65477 61.9977 28.3719C41.2408 50.0848 34.4128 79.9912 42.4698 111.809C15.158 118.501 1.63871 141.306 0.136559 163.019C-1.2718e-07 164.521 0 165.887 0 167.252C0 192.925 16.7967 221.739 54.2139 224.47H195.962C215.353 224.47 233.925 217.233 248.127 204.26C270.387 184.732 278.58 154.279 269.567 124.646Z"
+        fill={`url(#${gradientId})`}
+      />
+    </svg>
+  );
+};
 
 export default CloudIcon;
