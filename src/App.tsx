@@ -2,6 +2,7 @@ import Navigation from './components/Navigation';
 import Letters from './components/Letters';
 import Sparkles from './components/shapes/Sparkles';
 import AuroraBackground from './components/AuroraBackground';
+import { useState, useEffect } from 'react';
 // import { Suspense } from 'react';
 
 const mockData = [
@@ -53,14 +54,17 @@ const mockData = [
 ];
 
 const App = () => {
+  const [selectedLetter, setSelectedLetter] = useState<string>('');
+
+  useEffect(()=> {console.log(selectedLetter)}, [selectedLetter, setSelectedLetter])
+
   return (
-    <section className='relative'>
+    <section>
       <Navigation />
       <div className='noise-overlay'></div>
       <Sparkles />
-      <AuroraBackground>
-        <Letters data={mockData}/>
-      </AuroraBackground>
+      <Letters data={mockData} onClick={setSelectedLetter}/>
+      <AuroraBackground />
     </section>
     
   )

@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion';
 
-interface AuroraBackgroundProps {
-  children: React.ReactNode;
-}
-
-const AuroraBackground = ({ children }: AuroraBackgroundProps) => {
+const AuroraBackground = () => {
   return (
     <main className="relative w-screen h-screen flex justify-center items-center bg-green transition-bg">
       <motion.div className="absolute inset-0 overflow-hidden">
@@ -145,10 +141,6 @@ const AuroraBackground = ({ children }: AuroraBackgroundProps) => {
           }}
         />
       </motion.div>
-
-      <div className="relative flex flex-col items-center justify-center">
-        {children}
-      </div>
     </main>
   );
 };

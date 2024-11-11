@@ -6,9 +6,10 @@ export interface ShapeProps {
 
   export interface LetterBtnProps {
     id: string;
-    size: number;
+    baseSize: number;
     color: string;
     onClick: (id: string) => void;
+    usedCoordinates: Set<string> 
   }
 
   export interface LetterProps {
