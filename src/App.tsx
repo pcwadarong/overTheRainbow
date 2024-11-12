@@ -43,19 +43,19 @@ const App = () => {
   return (
     <section>
       <Navigation onOpen={() => toggleModal(null)} />
-      <div className='noise-overlay'></div>
-      <Sparkles />
-      <Letters data={data} onClick={(id) => toggleModal(id)} />
-      <AuroraBackground />
+      {/* <div className='noise-overlay'></div>
+      <Sparkles /> */}
+      {/* <Letters data={data} onClick={(id) => toggleModal(id)} /> */}
+      {/* <AuroraBackground /> */}
 
-      {isOpened && (
+      {/* {isOpened && (
         <Modals
           type={selectedLetter ? 'LETTER' : 'FORM'}
           data={data}
           id={selectedLetter}
           onClose={() => toggleModal(null)}
         />
-      )}
+      )} */}
     </section>
   );
 };
