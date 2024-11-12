@@ -5,6 +5,7 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <div className='noise-overlay'></div>
     <App />
   </StrictMode>,
 )
