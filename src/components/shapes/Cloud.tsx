@@ -1,6 +1,7 @@
-import { ShapeProps } from "../../types";
-import { useMemo } from "react";
-import { parseGradient } from "../../utils/parseGradient";
+import { useMemo } from 'react';
+
+import { ShapeProps } from '../../types';
+import { parseGradient } from '../../utils/parseGradient';
 
 const CloudIcon = ({
   color,
@@ -8,7 +9,10 @@ const CloudIcon = ({
   height = 300,
   ...props
 }: ShapeProps) => {
-  const gradientId = useMemo(() => `gradient-${Math.random().toString(36).substr(2, 9)}`, []);
+  const gradientId = useMemo(
+    () => `gradient-${Math.random().toString(36).substr(2, 9)}`,
+    [],
+  );
   const gradientStops = parseGradient(color);
 
   return (
@@ -23,8 +27,8 @@ const CloudIcon = ({
       {...props}
     >
       <defs>
-       <linearGradient id={gradientId} gradientUnits="userSpaceOnUse">
-         {gradientStops.map((stopColor, index) => (
+        <linearGradient id={gradientId} gradientUnits="userSpaceOnUse">
+          {gradientStops.map((stopColor, index) => (
             <stop
               key={index}
               offset={`${(index / (gradientStops.length - 1)) * 100}%`}

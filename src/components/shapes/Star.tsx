@@ -1,6 +1,7 @@
-import { ShapeProps } from "../../types";
-import { useMemo } from "react";
-import { parseGradient } from "../../utils/parseGradient";
+import { useMemo } from 'react';
+
+import { ShapeProps } from '../../types';
+import { parseGradient } from '../../utils/parseGradient';
 
 const StarIcon = ({
   color,
@@ -8,7 +9,10 @@ const StarIcon = ({
   height = 254,
   ...props
 }: ShapeProps) => {
-  const gradientId = useMemo(() => `gradient-${Math.random().toString(36).substr(2, 9)}`, []);
+  const gradientId = useMemo(
+    () => `gradient-${Math.random().toString(36).substr(2, 9)}`,
+    [],
+  );
   const gradientStops = parseGradient(color);
 
   return (
@@ -23,7 +27,14 @@ const StarIcon = ({
       {...props}
     >
       <defs>
-        <linearGradient id={gradientId} x1="132.5" y1="-28" x2="132.5" y2="303" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id={gradientId}
+          x1="132.5"
+          y1="-28"
+          x2="132.5"
+          y2="303"
+          gradientUnits="userSpaceOnUse"
+        >
           {gradientStops.map((stopColor, index) => (
             <stop
               key={index}

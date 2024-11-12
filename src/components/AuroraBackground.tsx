@@ -4,7 +4,6 @@ const AuroraBackground = () => {
   return (
     <main className="relative w-screen h-screen flex justify-center items-center bg-green transition-bg">
       <motion.div className="absolute inset-0 overflow-hidden">
-        
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-[rgb(99,177,255)] to-transparent opacity-90 blur-[70px] bg-[length:200%]"
           style={{ borderRadius: '20% 50% 30% 50%' }}
@@ -39,7 +38,7 @@ const AuroraBackground = () => {
           }}
         />
 
-<motion.div
+        <motion.div
           className="absolute inset-0 h-2/3 w-4/5 bg-gradient-to-bl from-[#ff95cc] to-transparent opacity-70 blur-[50px] bg-[length:120%]"
           style={{ borderRadius: '40% 30% 50% 60%' }}
           animate={{
@@ -107,7 +106,7 @@ const AuroraBackground = () => {
           }}
         />
 
-<motion.div
+        <motion.div
           className="absolute inset-0 w-2/3 h-3/4 bg-gradient-to-t from-[#f9b997] to-transparent opacity-50 blur-[70px] bg-[length:170%]"
           style={{ borderRadius: '25% 60% 40% 60%' }}
           animate={{

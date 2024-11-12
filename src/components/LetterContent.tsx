@@ -1,4 +1,4 @@
-import { LetterProps } from "../types";
+import { LetterProps } from '../types';
 
 interface LetterContentProps {
   letter: LetterProps;
@@ -9,7 +9,7 @@ const LetterContent = ({ letter, id }: LetterContentProps) => (
   <>
     {letter.imageURL && (
       <div className="w-56 h-56 border-2 overflow-hidden border-neutral-100 rounded-full">
-        <img src={letter.imageURL} alt={`Letter #${id} image`} />
+        <img src={letter.imageURL} alt={`Letter #${id}`} />
       </div>
     )}
     <p className="text-font whitespace-pre-line">{letter.content}</p>

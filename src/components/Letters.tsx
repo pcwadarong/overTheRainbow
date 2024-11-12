@@ -1,9 +1,13 @@
-import { useCallback, useMemo } from "react";
-import { LetterProps } from "../types";
-import { GradientColors } from "./../constants/gradientColors";
-import RandomComp from "./RandomComp";
+import { useCallback, useMemo } from 'react';
 
-const Letters: React.FC<{data: LetterProps[], onClick: (letter: string) => void}> = ({ data, onClick }) => {
+import { LetterProps } from '../types';
+import { GradientColors } from './../constants/gradientColors';
+import RandomComp from './RandomComp';
+
+const Letters: React.FC<{
+  data: LetterProps[];
+  onClick: (letter: string) => void;
+}> = ({ data, onClick }) => {
   const usedCoordinates = useMemo(() => new Set<string>(), []);
 
   const handleButtonClick = useCallback((letter: string) => {
@@ -25,7 +29,9 @@ const Letters: React.FC<{data: LetterProps[], onClick: (letter: string) => void}
           <RandomComp
             id={letter.id}
             baseSize={baseSize}
-            color={GradientColors[Math.floor(Math.random() * GradientColors.length)]}
+            color={
+              GradientColors[Math.floor(Math.random() * GradientColors.length)]
+            }
             onClick={handleButtonClick}
             usedCoordinates={usedCoordinates}
           />

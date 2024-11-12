@@ -1,10 +1,6 @@
-import { ShapeProps } from "../../types";
+import { ShapeProps } from '../../types';
 
-const CircleIcon = ({
-  color,
-  width = 300,
-  height = 300,
-}: ShapeProps) => {
+const CircleIcon = ({ color, width = 300, height = 300 }: ShapeProps) => {
   return (
     <div
       role="img"
@@ -15,9 +11,8 @@ const CircleIcon = ({
         borderRadius: '100%',
       }}
       className="relative"
-    >
-    </div>
+    ></div>
   );
-}
+};
 
 export default CircleIcon;
