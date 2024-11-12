@@ -6,7 +6,7 @@ import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import CodeIcon from '../assets/Code.svg';
 
-const Navigation = () => {
+const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -15,7 +15,6 @@ const Navigation = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Cloud Icon 버튼 */}
       <button className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
         <img src={CloudIcon} alt="Cloud Icon" className="w-6 h-6 md:w-8 md:h-8" />
       </button>
@@ -27,7 +26,7 @@ const Navigation = () => {
       >
         <li className="border-b border-b-nav w-full"></li>
         <li>
-          <button>
+          <button onClick={onOpen}>
             <img src={WriteIcon} alt="Write Icon" className="w-6 h-6 md:w-8 md:h-8" />
           </button>
         </li>

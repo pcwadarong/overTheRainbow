@@ -2,7 +2,7 @@ import Navigation from './components/Navigation';
 import Letters from './components/Letters';
 import Sparkles from './components/shapes/Sparkles';
 import AuroraBackground from './components/AuroraBackground';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modals from './components/Modal';
 // import { Suspense } from 'react';
 
@@ -19,39 +19,34 @@ const mockData = [
 ];
 
 const App = () => {
-  const [selectedLetter, setSelectedLetter] = useState<string>('');
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
-    useEffect(() => {
-      if (selectedLetter) {
-        setIsOpened(true);
-      } else {
-        setIsOpened(false);
-      }
-    }, [selectedLetter]);
-
-    const closeModal = () => {
-      setIsOpened(false);
-      setSelectedLetter('');
-    };
-
+  const toggleModal = (letterId: string | null = null) => {
+    setIsOpened(prev => !prev);
+    setSelectedLetter(letterId);
+  };
     
   return (
     <section>
-      <Navigation />
+      <Navigation onOpen={() => toggleModal(null)} />
       <div className='noise-overlay'></div>
       <Sparkles />
-      <Letters data={mockData} onClick={setSelectedLetter}/>
+      <Letters data={mockData} onClick={(id) => toggleModal(id)} />
       <AuroraBackground />
 
       {isOpened && (
         <>
-          <Modals data={mockData} id={selectedLetter} onClose={closeModal} />
-          <div className="z-40 fixed inset-0 bg-black/40" onClick={closeModal}></div>
+          <Modals 
+            type={selectedLetter ? 'LETTER' : 'FORM'} 
+            data={mockData} 
+            id={selectedLetter} 
+            onClose={() => toggleModal(null)} 
+          />
+          
         </>
       )}
     </section>
-    
   )
 }
 
