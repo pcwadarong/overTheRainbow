@@ -43,7 +43,7 @@ const App = () => {
   return (
     <section>
       {/* <Navigation onOpen={() => toggleModal(null)} /> */}
-      <div className='noise-overlay'></div>
+      {/* <div className='noise-overlay'></div> */}
       {/* <Sparkles /> */}
       {/* <Letters data={data} onClick={(id) => toggleModal(id)} /> */}
       <AuroraBackground />
