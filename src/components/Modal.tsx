@@ -1,7 +1,7 @@
 import { LetterProps } from "../types";
 import CancelBtn from './../assets/Cancel.svg'
 import ImageBtn from './../assets/image.svg'
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 interface ModalProps {
   type: 'LETTER' | 'FORM';
@@ -12,10 +12,12 @@ interface ModalProps {
 
 const Modals = ({ type, data, id, onClose }: ModalProps) => {
   const letter = data.find((letter) => letter.id === id);
-  const [image, setImage] = useState<string | null>(null); 
+  const [image, setImage] = useState<string | null>(null);
   const [letterContent, setLetterContent] = useState('');
   const [contact, setContact] = useState('');
   const [error, setError] = useState(false);
+
+  const textRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
       setError(true);
     } else {
       setError(false);
+      alert('수정/삭제는 인스타그램 DM으로 문의 바랍니다. 참여해주셔서 정말 감사합니다!')
       onClose();
     }
   };
@@ -44,6 +47,13 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
     }
   };
 
+  const handleResizeHeight = useCallback(() => {
+    if (textRef.current) {
+      textRef.current.style.height = "auto"; 
+      textRef.current.style.height = `${textRef.current.scrollHeight}px`;
+    }
+  }, []);
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-8">
       <div className="fixed inset-0 bg-black/40" onClick={handleClose}></div>
@@ -88,11 +98,13 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
                 </div>
                 <textarea
                   id="letterContent"
+                  ref={textRef}
                   placeholder="전하고 싶은 내용을 적어주세요."
                   value={letterContent}
                   onChange={(e) => setLetterContent(e.target.value)}
-                  className="whitespace-pre-wrap p-3 border-2 rounded-2xl bg-transparent border-neutral-300"
-                ></textarea>
+                  onInput={handleResizeHeight}
+                  className="whitespace-pre-wrap overflow-hidden resize-none p-3 border-2 rounded-2xl bg-transparent border-neutral-300"
+            ></textarea>
                 
                 <label className="text-font font-semibold mt-3 text-lg" htmlFor="contact">{'빠른 확인이 가능한 연락처'}</label>
                 <p className="text-neutral-400 mt-[-14px] text-sm">{'남겨주실 경우 추첨을 통해 아이의 예쁜 모습을 그린 굿즈를 드립니다.'}</p>
@@ -101,7 +113,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
                   placeholder="인스타그램/ X DM, 전화번호, 이메일 주소 등"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  className="whitespace-pre-wrap p-3 border-2 rounded-2xl bg-transparent border-neutral-300"
+                  className="p-3 border-2 rounded-2xl bg-transparent border-neutral-300"
                 ></input>
 
                 <button type="submit" className="mt-4 px-12 py-3 bg-pink text-white rounded-3xl w-fit m-auto">
