@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from './firebase/firebaseConfig';
 
-// import Navigation from './components/Navigation';
+import Navigation from './components/Navigation';
 // import Letters from './components/Letters';
-// import Sparkles from './components/shapes/Sparkles';
+import Sparkles from './components/shapes/Sparkles';
 import AuroraBackground from './components/AuroraBackground';
 import Modals from './components/Modal';
 import { LetterProps } from './types';
@@ -42,9 +42,9 @@ const App = () => {
 
   return (
     <section>
-      {/* <Navigation onOpen={() => toggleModal(null)} /> */}
+      <Navigation onOpen={() => toggleModal(null)} />
       {/* <div className='noise-overlay'></div> */}
-      {/* <Sparkles /> */}
+      <Sparkles />
       {/* <Letters data={data} onClick={(id) => toggleModal(id)} /> */}
       <AuroraBackground />
 
