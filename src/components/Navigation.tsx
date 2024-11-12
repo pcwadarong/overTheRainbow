@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CloudIcon from '../assets/Cloud.svg';
 import WriteIcon from '../assets/Write.svg';
-import SearchIcon from '../assets/Search.svg';
+// import SearchIcon from '../assets/Search.svg';
 import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import CodeIcon from '../assets/Code.svg';
