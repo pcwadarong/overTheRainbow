@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import CloudIcon from '../assets/Cloud.svg';
 import WriteIcon from '../assets/Write.svg';
-// import SearchIcon from '../assets/Search.svg';
 import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import CodeIcon from '../assets/Code.svg';
 
-// 모바일 여부 확인 함수
 const checkIsMobile = () => {
   const mobileRegex = [
-      /Android/i,
-      /iPhone/i,
-      /iPad/i,
-      /iPod/i,
-      /BlackBerry/i,
-      /Windows Phone/i,
+    /Android/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
   ];
 
   const agent = window.navigator.userAgent;
@@ -23,17 +21,16 @@ const checkIsMobile = () => {
   return isMobile;
 };
 
-const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
+const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isMobile = checkIsMobile();
 
-  //default
+  // 기본 mouse enter / leave 이벤트 처리
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  //touch device
-  const handleTouchStart = () => setIsHovered(true);
-  const handleTouchEnd = () => setIsHovered(false);
+  // 모바일에서 터치 시 토글 처리
+  const handleTouchStart = () => setIsHovered((prev) => !prev);
 
   return (
     <nav
@@ -41,7 +38,6 @@ const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
       onMouseEnter={!isMobile ? handleMouseEnter : undefined}
       onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       onTouchStart={isMobile ? handleTouchStart : undefined}
-      onTouchEnd={isMobile ? handleTouchEnd : undefined}
     >
       <button className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
         <img src={CloudIcon} alt="Cloud Icon" className="w-6 h-6 md:w-8 md:h-8" />
@@ -58,11 +54,6 @@ const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
             <img src={WriteIcon} alt="Write Icon" className="w-6 h-6 md:w-8 md:h-8" />
           </button>
         </li>
-        {/* <li>
-          <button>
-            <img src={SearchIcon} alt="Search Icon" className="w-6 h-6 md:w-8 md:h-8" />
-          </button>
-        </li> */}
         <li>
           <a href="https://www.hidcgs2024.com/" target="_blank" rel="noopener noreferrer">
             <img src={HeartIcon} alt="Heart Icon" className="w-6 h-6 md:w-8 md:h-8" />
