@@ -4,8 +4,8 @@ import { firestore } from './firebase/firebaseConfig';
 
 // import Navigation from './components/Navigation';
 // import Letters from './components/Letters';
-import Sparkles from './components/shapes/Sparkles';
-// import AuroraBackground from './components/AuroraBackground';
+// import Sparkles from './components/shapes/Sparkles';
+import AuroraBackground from './components/AuroraBackground';
 import Modals from './components/Modal';
 import { LetterProps } from './types';
 
@@ -44,9 +44,9 @@ const App = () => {
     <section>
       {/* <Navigation onOpen={() => toggleModal(null)} /> */}
       <div className='noise-overlay'></div>
-      <Sparkles />
+      {/* <Sparkles /> */}
       {/* <Letters data={data} onClick={(id) => toggleModal(id)} /> */}
-      {/* <AuroraBackground /> */}
+      <AuroraBackground />
 
       {isOpened && (
         <Modals
