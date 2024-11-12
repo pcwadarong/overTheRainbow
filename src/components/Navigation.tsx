@@ -6,17 +6,42 @@ import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import CodeIcon from '../assets/Code.svg';
 
+// 모바일 여부 확인 함수
+const checkIsMobile = () => {
+  const mobileRegex = [
+      /Android/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+  ];
+
+  const agent = window.navigator.userAgent;
+  const isMobile = mobileRegex.some((regex) => agent.match(regex));
+
+  return isMobile;
+};
+
 const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = checkIsMobile();
 
+  //default
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+
+  //touch device
+  const handleTouchStart = () => setIsHovered(true);
+  const handleTouchEnd = () => setIsHovered(false);
 
   return (
     <nav
       className="bg-white bg-opacity-50 p-2 md:p-4 absolute top-4 start-4 md:top-8 md:start-8 z-30 rounded-2xl md:rounded-3xl backdrop-blur-2xl"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={!isMobile ? handleMouseEnter : undefined}
+      onMouseLeave={!isMobile ? handleMouseLeave : undefined}
+      onTouchStart={isMobile ? handleTouchStart : undefined}
+      onTouchEnd={isMobile ? handleTouchEnd : undefined}
     >
       <button className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
         <img src={CloudIcon} alt="Cloud Icon" className="w-6 h-6 md:w-8 md:h-8" />

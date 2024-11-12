@@ -12,9 +12,9 @@ const Letters: React.FC<{data: LetterProps[], onClick: (letter: string) => void}
 
   // 윈도우 크기에 따라 기본 아이콘 크기 설정 (한 번만 계산)
   const baseSize = useMemo(() => {
-    // const windowWidth = window.innerWidth;
-    // if (windowWidth < 540) return 150; // phone
-    // if (windowWidth < 1024) return 200; // ipad
+    const windowWidth = window.innerWidth;
+    if (windowWidth < 540) return 150; // phone
+    if (windowWidth < 1024) return 200; // ipad
     return 300; // desktop
   }, []);
 
