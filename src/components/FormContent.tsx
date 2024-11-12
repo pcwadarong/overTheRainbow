@@ -76,6 +76,7 @@ const FormContent = ({ onClose, image, letterContent, setLetterContent, contact,
 
       alert('수정/삭제는 인스타그램 DM으로 문의 바랍니다. 참여해주셔서 정말 감사합니다!');
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error("Error saving document:", error);
       console.log(imageUrl)
