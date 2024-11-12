@@ -10,9 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cloudinary/react": "^1.13.1",
-    "@cloudinary/url-gen": "^1.21.0",
     "autoprefixer": "^10.4.20",
+    "browser-image-compression": "^2.0.2",
     "firebase": "^11.0.1",
     "framer-motion": "^11.11.11",
     "postcss": "^8.4.47",

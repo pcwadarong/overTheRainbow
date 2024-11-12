@@ -1,8 +1,10 @@
 import { useState, useRef, useCallback } from "react";
+import { firestore } from './../firebase/firebaseConfig';
+import { collection, addDoc } from "firebase/firestore";
 
 interface FormContentProps {
   onClose: () => void;
-  image: string | null;
+  image: File | null;
   letterContent: string;
   setLetterContent: (letterContent: string) => void;
   contact: string;
@@ -20,14 +22,67 @@ const FormContent = ({ onClose, image, letterContent, setLetterContent, contact,
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadToCloudinary = async (file: File) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", import.meta.env.VITE_APP_CLOUD_UPLOAD_PRESET);
+
+    const cloudName = import.meta.env.VITE_APP_CLOUD_NAME;
+    console.log(cloudName);
+
+     try {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: "POST",
+      body: data,
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to upload image");
+    }
+
+    const result = await res.json();
+    return result.secure_url; // 보안 URL 사용
+  } catch (error) {
+    console.error("Error uploading image to Cloudinary:", error);
+    throw error;
+  }
+};
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!letterContent.trim()) {
       setError(true);
-    } else {
-      setError(false);
+      return;
+    }
+    
+    let imageUrl = null;
+    if (image) {
+      try {
+        imageUrl = await uploadToCloudinary(image);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("이미지 업로드 중 오류가 발생했습니다.");
+        return;
+      }
+    }
+
+    const createdDate = new Date();
+
+    try {
+      // Firestore에 데이터 저장
+      await addDoc(collection(firestore, 'letters'), {
+        letterContent,
+        contact,
+        imageUrl,
+        createdDate,
+      });
+
       alert('수정/삭제는 인스타그램 DM으로 문의 바랍니다. 참여해주셔서 정말 감사합니다!');
       onClose();
+    } catch (error) {
+      console.error("Error saving document:", error);
+      console.log(imageUrl)
+      alert("오류가 발생했습니다. 다시 시도해 주세요.");
     }
   };
 

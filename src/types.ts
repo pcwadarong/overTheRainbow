@@ -14,7 +14,7 @@ export interface ShapeProps {
 
   export interface LetterProps {
     id: string;
-    image: string | null;
+    imageURL: string | null;
     content: string;
   }
   
