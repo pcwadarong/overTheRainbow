@@ -53,13 +53,11 @@
   .noise-overlay {
     pointer-events: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
     z-index: 35;
-    background-image: url('assets/noise.png');
+    /* background-image: url('assets/noise.png');
     opacity: 0.1;
-    mix-blend-mode: overlay;
+    mix-blend-mode: overlay; */
   }
 }
