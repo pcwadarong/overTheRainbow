@@ -14,7 +14,7 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
       try {
         const compressedFile = await imageCompression(file, {
           maxSizeMB: 1,
-          maxWidthOrHeight: 500,
+          maxWidthOrHeight: 400,
         });
         setImage(compressedFile);
       } catch (error) {
@@ -25,7 +25,7 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
   };
 
   return (
-    <div className="relative w-56 h-56">
+    <div className="relative w-40 h-40">
       <label
         htmlFor="image-upload"
         className="cursor-pointer w-full h-full bg-neutral-200 rounded-full flex items-center justify-center overflow-hidden"

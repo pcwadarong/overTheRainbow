@@ -41,7 +41,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
         }}
       ></div>
       <div
-        className="relative p-8 w-full md:w-fit h-full md:h-fit bg-gradient-to-b from-gr1 to-gr2 max-w-[790px] md:rounded-2xl shadow-2xl"
+        className="relative overflow-y-auto p-8 w-full md:w-fit md:min-w-96 h-full md:h-fit md:max-h-full bg-gradient-to-b from-gr1 to-gr2 max-w-[790px] md:rounded-2xl shadow-2xl"
         role="dialog"
         aria-modal="true"
       >
@@ -53,7 +53,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
           <img src={CancelBtn} alt="x" />
         </button>
 
-        <div className="mt-10 w-full flex flex-col items-center justify-center overflow-y-auto gap-8">
+        <div className="mt-10 w-full flex flex-col items-center justify-center gap-8">
           {type === 'LETTER' && letter ? (
             <LetterContent letter={letter} id={id} />
           ) : (

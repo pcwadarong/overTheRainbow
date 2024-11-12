@@ -1,7 +1,6 @@
-import { addDoc, collection } from 'firebase/firestore';
 import { useCallback, useRef, useState } from 'react';
-
 import { firestore } from './../firebase/firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 interface FormContentProps {
   onClose: () => void;
@@ -98,7 +97,10 @@ const FormContent = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 w-full max-w-[500px]"
+    >
       <div>
         <label
           htmlFor="letterContent"
@@ -126,7 +128,7 @@ const FormContent = ({
         빠른 확인이 가능한 연락처
       </label>
       <p className="text-neutral-400 mt-[-14px] text-sm">
-        남겨주실 경우 추첨을 통해 아이의 예쁜 모습을 그린 굿즈를 드립니다.
+        남겨주실 경우 추첨을 통해 굿즈를 제작해드립니다.
       </p>
       <input
         id="contact"
