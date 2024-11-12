@@ -3,9 +3,9 @@ import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from './firebase/firebaseConfig';
 
 import Navigation from './components/Navigation';
-import Letters from './components/Letters';
-import Sparkles from './components/shapes/Sparkles';
-import AuroraBackground from './components/AuroraBackground';
+// import Letters from './components/Letters';
+// import Sparkles from './components/shapes/Sparkles';
+// import AuroraBackground from './components/AuroraBackground';
 import Modals from './components/Modal';
 import { LetterProps } from './types';
 
@@ -48,14 +48,14 @@ const App = () => {
       {/* <Letters data={data} onClick={(id) => toggleModal(id)} /> */}
       {/* <AuroraBackground /> */}
 
-      {/* {isOpened && (
+      {isOpened && (
         <Modals
           type={selectedLetter ? 'LETTER' : 'FORM'}
           data={data}
           id={selectedLetter}
           onClose={() => toggleModal(null)}
         />
-      )} */}
+      )}
     </section>
   );
 };
