@@ -21,13 +21,15 @@
   }
 
   body {
-    font-family: 'Suit', sans-serif;
-    font-weight: 400;
     margin: 0;
-    display: flex;
-    place-items: center;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    font-weight: 400;
+    font-family: 'Suit', sans-serif;
+    line-height: 1.7rem;
+    letter-spacing: -0.02em;
+    place-items: center;
     background-color: #D8F7D7;
   }
 

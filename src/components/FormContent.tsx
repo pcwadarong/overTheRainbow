@@ -85,7 +85,7 @@ const FormContent = ({ onClose, image, letterContent, setLetterContent, contact,
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label htmlFor="letterContent" className="text-font font-semibold text-lg">전하고 싶은 내용</label>
         {error && <span className="text-pink ml-2 text-sm">* 필수 입력 사항입니다.</span>}

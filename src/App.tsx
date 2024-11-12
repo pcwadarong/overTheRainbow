@@ -34,6 +34,19 @@ const App = () => {
     fetchData();
   }, []);
 
+  // 모달이 열리면 body 스크롤을 막고, 닫히면 스크롤을 복구
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpened]);
+
   // 모달을 열고 닫는 함수
   const toggleModal = useCallback((letterId: string | null = null) => {
     setIsOpened((prev) => !prev);

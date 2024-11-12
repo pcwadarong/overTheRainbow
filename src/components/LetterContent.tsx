@@ -2,7 +2,7 @@ import { LetterProps } from "../types";
 
 interface LetterContentProps {
   letter: LetterProps;
-  id: string;
+  id: string | null;
 }
 
 const LetterContent = ({ letter, id }: LetterContentProps) => (

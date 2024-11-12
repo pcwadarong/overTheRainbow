@@ -26,16 +26,16 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-8">
+    <div className="fixed inset-0 flex items-center justify-center z-50 md:p-8">
       <div className="fixed inset-0 bg-black/40" onClick={handleClose}></div>
-      <div className="relative p-8 h-fit bg-gradient-to-b from-gr1 to-gr2 max-w-[790px] rounded-2xl shadow-2xl" role="dialog" aria-modal="true">
+      <div className="relative p-8 w-full md:w-fit h-full md:h-fit bg-gradient-to-b from-gr1 to-gr2 max-w-[790px] md:rounded-2xl shadow-2xl" role="dialog" aria-modal="true">
         <button onClick={handleClose} className="absolute right-8 top-8 text-3xl text-gray hover:text-dark p-4 -m-4" aria-label="닫기">
           <img src={CancelBtn} alt="x" />
         </button>
 
         <div className="mt-10 w-full flex flex-col items-center justify-center overflow-y-auto gap-8">
           {type === 'LETTER' && letter ? (
-            <LetterContent letter={letter} id={id!} />
+            <LetterContent letter={letter} id={id} />
           ) : (
             <>
               <ImageUploadForm image={image} setImage={setImage} />
