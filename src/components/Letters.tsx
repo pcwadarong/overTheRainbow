@@ -4,7 +4,7 @@ import { GradientColors } from "./../constants/gradientColors";
 import RandomComp from "./RandomComp";
 
 const Letters: React.FC<{data: LetterProps[], onClick: (letter: string) => void}> = ({ data, onClick }) => {
-  const usedCoordinates = new Set<string>();
+  const usedCoordinates = useMemo(() => new Set<string>(), []);
 
   const handleButtonClick = useCallback((letter: string) => {
     onClick(letter);

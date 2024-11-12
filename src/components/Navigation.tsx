@@ -9,11 +9,14 @@ import CodeIcon from '../assets/Code.svg';
 const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
   return (
     <nav
       className="bg-white bg-opacity-50 p-2 md:p-4 absolute top-4 start-4 md:top-8 md:start-8 z-30 rounded-2xl md:rounded-3xl backdrop-blur-2xl"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
         <img src={CloudIcon} alt="Cloud Icon" className="w-6 h-6 md:w-8 md:h-8" />
@@ -30,11 +33,11 @@ const Navigation: React.FC<{onOpen: () => void}> = ({ onOpen }) => {
             <img src={WriteIcon} alt="Write Icon" className="w-6 h-6 md:w-8 md:h-8" />
           </button>
         </li>
-        <li>
+        {/* <li>
           <button>
             <img src={SearchIcon} alt="Search Icon" className="w-6 h-6 md:w-8 md:h-8" />
           </button>
-        </li>
+        </li> */}
         <li>
           <a href="https://www.hidcgs2024.com/" target="_blank" rel="noopener noreferrer">
             <img src={HeartIcon} alt="Heart Icon" className="w-6 h-6 md:w-8 md:h-8" />

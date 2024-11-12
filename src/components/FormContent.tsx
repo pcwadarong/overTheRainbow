@@ -28,7 +28,6 @@ const FormContent = ({ onClose, image, letterContent, setLetterContent, contact,
     data.append("upload_preset", import.meta.env.VITE_APP_CLOUD_UPLOAD_PRESET);
 
     const cloudName = import.meta.env.VITE_APP_CLOUD_NAME;
-    console.log(cloudName);
 
      try {
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
@@ -36,12 +35,10 @@ const FormContent = ({ onClose, image, letterContent, setLetterContent, contact,
       body: data,
     });
 
-    if (!res.ok) {
-      throw new Error("Failed to upload image");
-    }
+    if (!res.ok) throw new Error("Failed to upload image");
 
     const result = await res.json();
-    return result.secure_url; // 보안 URL 사용
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading image to Cloudinary:", error);
     throw error;

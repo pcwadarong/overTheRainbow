@@ -7,7 +7,6 @@ interface ImageUploadFormProps {
 }
 
 const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
-
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -16,6 +15,7 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
         setImage(compressedFile);
       } catch (error) {
         console.error("Image compression error:", error);
+        alert("이미지 압축 중 오류가 발생했습니다.");
       }
     }
   };

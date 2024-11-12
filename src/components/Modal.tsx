@@ -1,9 +1,9 @@
-import { LetterProps } from "../types";
-import CancelBtn from './../assets/Cancel.svg';
 import { useState } from "react";
+import CancelBtn from './../assets/Cancel.svg';
 import LetterContent from "./LetterContent";
 import ImageUploadForm from "./ImageUploadForm";
 import FormContent from "./FormContent";
+import { LetterProps } from "../types";
 
 interface ModalProps {
   type: 'LETTER' | 'FORM';
@@ -39,7 +39,14 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
           ) : (
             <>
               <ImageUploadForm image={image} setImage={setImage} />
-              <FormContent onClose={onClose} image={image} letterContent={letterContent} setLetterContent={setLetterContent} contact={contact} setContact={setContact} />
+              <FormContent
+                onClose={onClose}
+                image={image}
+                letterContent={letterContent}
+                setLetterContent={setLetterContent}
+                contact={contact}
+                setContact={setContact}
+              />
             </>
           )}
         </div>
