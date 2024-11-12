@@ -11,7 +11,7 @@ const Navigation = () => {
 
   return (
     <nav
-      className="bg-white bg-opacity-50 p-2 md:p-4 absolute top-4 start-4 md:top-8 md:start-8 z-50 rounded-2xl md:rounded-3xl backdrop-blur-2xl"
+      className="bg-white bg-opacity-50 p-2 md:p-4 absolute top-4 start-4 md:top-8 md:start-8 z-30 rounded-2xl md:rounded-3xl backdrop-blur-2xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

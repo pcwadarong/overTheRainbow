@@ -19,7 +19,7 @@ const Letters: React.FC<{data: LetterProps[], onClick: (letter: string) => void}
   }, []);
 
   return (
-    <div className="absolute inset-0 z-40 overflow-hidden">
+    <div className="absolute inset-0 z-20 overflow-hidden">
       {data.map((letter) => (
         <div key={letter.id}>
           <RandomComp

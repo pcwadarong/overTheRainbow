@@ -10,6 +10,8 @@ module.exports = {
         pink: '#ecc94b',
         nav: '#77A3D8',
         green: '#D8F7D7',
+        gr1: '#FFF2F2',
+        gr2: '#FFF8DA',
       },
     },
   },
