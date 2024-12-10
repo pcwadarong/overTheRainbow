@@ -67,7 +67,7 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
         </li>
         <li>
           <a
-            href="https://www.hidcgs2024.com/"
+            href="https://www.hidcgs2024.com/project_view.php?idx=64"
             target="_blank"
             rel="noopener noreferrer"
           >
