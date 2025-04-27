@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 import CloudIcon from '../assets/Cloud.svg';
 import CodeIcon from '../assets/Code.svg';
@@ -6,32 +6,38 @@ import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import WriteIcon from '../assets/Write.svg';
 
-const checkIsMobile = () => {
-  const mobileRegex = [
-    /Android/i,
-    /iPhone/i,
-    /iPad/i,
-    /iPod/i,
-    /BlackBerry/i,
-    /Windows Phone/i,
-  ];
-
-  const agent = window.navigator.userAgent;
-  const isMobile = mobileRegex.some((regex) => agent.match(regex));
-
-  return isMobile;
-};
-
 const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const isMobile = checkIsMobile();
+  const [isMobile, setIsMobile] = useState(false);
 
-  // 기본 mouse enter / leave 이벤트 처리
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined') return;
 
-  // 모바일에서 터치 시 토글 처리
-  const handleTouchStart = () => setIsHovered((prev) => !prev);
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
+
+  const handleTouchStart = useCallback(() => {
+    setIsHovered((prev) => !prev);
+  }, []);
 
   return (
     <nav
@@ -40,7 +46,7 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
       onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       onTouchStart={isMobile ? handleTouchStart : undefined}
     >
-      <button className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
+      <button type="button" className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
         <img
           src={CloudIcon}
           alt="Cloud Icon"
@@ -55,9 +61,9 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
             : 'opacity-0 max-h-0 invisible'
         }`}
       >
-        <li className="border-b border-b-nav w-full"></li>
+        <li className="border-b border-b-nav w-full" />
         <li>
-          <button onClick={onOpen}>
+          <button type="button" onClick={onOpen}>
             <img
               src={WriteIcon}
               alt="Write Icon"
