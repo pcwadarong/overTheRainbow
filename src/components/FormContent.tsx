@@ -76,7 +76,6 @@ const FormContent = ({
     const createdDate = new Date();
 
     try {
-      // Firestore에 데이터 저장
       await addDoc(collection(firestore, 'letters'), {
         letterContent,
         contact,
