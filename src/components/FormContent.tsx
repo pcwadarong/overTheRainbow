@@ -1,6 +1,7 @@
-import { useCallback, useRef, useState } from 'react';
-import { firestore } from './../firebase/firebaseConfig';
 import { addDoc, collection } from 'firebase/firestore';
+import { useCallback, useRef, useState } from 'react';
+
+import { firestore } from './../firebase/firebaseConfig';
 
 interface FormContentProps {
   onClose: () => void;
