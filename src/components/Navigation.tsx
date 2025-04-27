@@ -73,7 +73,7 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
         </li>
         <li>
           <a
-            href="https://www.hidcgs2024.com/project_view.php?idx=64"
+            href="https://www.behance.net/gallery/224587611/Over-the-Rainbow"
             target="_blank"
             rel="noopener noreferrer"
           >
