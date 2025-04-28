@@ -15,6 +15,7 @@ interface Position {
 }
 
 const pickRandomPosition = (
+  baseSize: number,
   maxWidth: number,
   maxHeight: number,
   minDistance: number,
@@ -23,9 +24,10 @@ const pickRandomPosition = (
   let x: number, y: number, size: number;
   let attempts = 0;
   const maxAttempts = 30; // 최대 30번 시도
+  const variance = baseSize === 300 ? 100 : 50;
 
   do {
-    size = Math.floor(Math.random() * 100) + 150; // 사이즈 150~250px 랜덤
+    size = baseSize + Math.floor(Math.random() * (variance * 2 + 1)) - variance;
     x = Math.random() * (maxWidth - size);
     y = Math.random() * (maxHeight - size);
 
@@ -47,7 +49,7 @@ const pickRandomPosition = (
 };
 
 const RandomComp = memo(
-  ({ id, baseSize, xLimit, yLimit, color, onClick }: LetterBtnProps) => {
+  ({ id, baseSize, xLimit, yLimit, gradient, onClick }: LetterBtnProps) => {
     // IconComponent는 첫 렌더링 시 한 번만 선택되도록 설정
     const IconComponent = useMemo(() => {
       return ICON_COMPONENTS[Math.floor(Math.random() * 4)];
@@ -60,7 +62,13 @@ const RandomComp = memo(
 
     // 아이콘 크기, 좌표 설정 (페이지 새로고침 시에만 랜덤 값 적용)
     if (sizeRef.current === null || positionRef.current === null) {
-      const { x, y, size } = pickRandomPosition(xLimit, yLimit, 200, positions);
+      const { x, y, size } = pickRandomPosition(
+        baseSize,
+        xLimit,
+        yLimit,
+        200,
+        positions,
+      );
 
       sizeRef.current = size;
       positionRef.current = { x, y };
@@ -80,7 +88,7 @@ const RandomComp = memo(
         aria-label={`Letter Button ${id}`}
       >
         <IconComponent
-          color={color}
+          gradient={gradient}
           width={sizeRef.current ?? baseSize}
           height={sizeRef.current ?? baseSize}
         />

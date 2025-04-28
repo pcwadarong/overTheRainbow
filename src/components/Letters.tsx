@@ -44,7 +44,7 @@ const Letters: React.FC<LettersProps> = ({ data, onClick }) => {
           baseSize={baseSize}
           xLimit={xLimit}
           yLimit={yLimit}
-          color={
+          gradient={
             GradientColors[Math.floor(Math.random() * GradientColors.length)]
           }
           onClick={handleButtonClick}

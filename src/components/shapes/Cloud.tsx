@@ -1,19 +1,12 @@
 import { useMemo } from 'react';
 
 import { ShapeProps } from '../../types';
-import { parseGradient } from '../../utils/parseGradient';
 
-const CloudIcon = ({
-  color,
-  width = 300,
-  height = 300,
-  ...props
-}: ShapeProps) => {
+const CloudIcon = ({ gradient, width = 300, height = 300 }: ShapeProps) => {
   const gradientId = useMemo(
     () => `gradient-${Math.random().toString(36).substr(2, 9)}`,
     [],
   );
-  const gradientStops = parseGradient(color);
 
   return (
     <svg
@@ -24,16 +17,11 @@ const CloudIcon = ({
       fill="none"
       role="img"
       opacity="0.9"
-      {...props}
     >
       <defs>
         <linearGradient id={gradientId} gradientUnits="userSpaceOnUse">
-          {gradientStops.map((stopColor, index) => (
-            <stop
-              key={index}
-              offset={`${(index / (gradientStops.length - 1)) * 100}%`}
-              stopColor={stopColor}
-            />
+          {gradient.stops.map(({ color, offset }, index) => (
+            <stop key={index} offset={`${offset}%`} stopColor={color} />
           ))}
         </linearGradient>
       </defs>

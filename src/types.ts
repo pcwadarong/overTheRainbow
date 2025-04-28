@@ -1,5 +1,14 @@
+export interface GradientProps {
+  shape: 'linear' | 'radial';
+  angle?: number;
+  stops: {
+    color: string;
+    offset: number;
+  }[];
+}
+
 export interface ShapeProps {
-  color: string;
+  gradient: GradientProps;
   width: number;
   height: number;
 }
@@ -9,7 +18,7 @@ export interface LetterBtnProps {
   baseSize: number;
   xLimit: number;
   yLimit: number;
-  color: string;
+  gradient: GradientProps;
   onClick: (id: string) => void;
 }
 
