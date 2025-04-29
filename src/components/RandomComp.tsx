@@ -1,6 +1,6 @@
 import { memo, useMemo, useRef } from 'react';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { PositionProps } from '../types';
 import { LetterBtnProps } from '../types';
@@ -30,7 +30,7 @@ const RandomComp = memo(
         baseSize,
         xLimit,
         yLimit,
-        200,
+        300,
         positions,
       );
 
@@ -40,58 +40,42 @@ const RandomComp = memo(
 
     const { x, y } = positionRef.current;
 
-    //------------------------------------------------------------ motion
     // ✅ 랜덤 duration 값 useMemo로 생성
     const randomDuration = useRef(Math.random() * 4 + 8).current;
 
-    // ✅ variants를 내부에서 선언하며 랜덤 duration 적용
-    const buttonVariants: Variants = {
-      floating: {
-        x: [0, 5, 0, -5, 0],
-        y: [0, -10, 0, 10, 0],
-        rotate: [0, 2, 0, -2, 0],
-        transition: {
+    return (
+      <motion.div
+        className="absolute translate-x-[-50%] translate-y-[-50%]"
+        style={{
+          top: y,
+          left: x,
+          willChange: 'transform',
+        }}
+        animate={{
+          x: [0, 5, 0, -5, 0],
+          y: [0, -10, 0, 10, 0],
+          rotate: [0, 2, 0, -2, 0],
+        }}
+        transition={{
           duration: randomDuration,
           ease: 'easeInOut',
           repeat: Infinity,
           repeatType: 'mirror',
-        },
-      },
-      hover: {
-        scale: 1.1,
-        transition: {
-          type: 'spring',
-          stiffness: 300,
-          damping: 20,
-        },
-      },
-      tap: {
-        scale: 0.8,
-      },
-    };
-
-    return (
-      <motion.button
-        className="absolute"
-        onClick={() => onClick(id)}
-        aria-label={`Letter Button ${id}`}
-        style={{
-          top: y,
-          left: x,
-          transform: 'translate(-50%, -50%)',
-          willChange: 'transform',
         }}
-        variants={buttonVariants}
-        animate="floating"
-        whileHover="hover"
-        whileTap="tap"
       >
-        <IconComponent
-          gradient={gradient}
-          width={sizeRef.current ?? baseSize}
-          height={sizeRef.current ?? baseSize}
-        />
-      </motion.button>
+        <button
+          type="button"
+          onClick={() => onClick(id)}
+          aria-label={`Letter Button ${id}`}
+          className="transition-transform duration-300 ease-in-out hover:scale-110 active:scale-90 focus:scale-90 flex justify-center items-center"
+        >
+          <IconComponent
+            gradient={gradient}
+            width={sizeRef.current ?? baseSize}
+            height={sizeRef.current ?? baseSize}
+          />
+        </button>
+      </motion.div>
     );
   },
 );
