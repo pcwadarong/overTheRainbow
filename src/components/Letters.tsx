@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { LetterProps } from '../types';
+import { GradientProps, LetterProps } from '../types';
 import { GradientColors } from './../constants/gradientColors';
 import RandomComp from './RandomComp';
 
@@ -10,22 +10,42 @@ interface LettersProps {
 }
 
 const Letters: React.FC<LettersProps> = ({ data, onClick }) => {
-  const handleButtonClick = useCallback(
-    (letter: string) => {
-      onClick(letter);
-    },
-    [onClick],
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1920,
   );
+  const [windowHeight, setWindowHeight] = useState(
+    typeof window !== 'undefined' ? window.innerHeight : 1080,
+  );
+  const [baseSize, setBaseSize] = useState(
+    windowWidth < 540 ? 150 : windowWidth < 1024 ? 200 : 300,
+  );
+  const [coloredData, setColoredData] = useState<
+    { id: string; color: GradientProps }[]
+  >([]);
 
-  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
-  const windowHeight =
-    typeof window !== 'undefined' ? window.innerHeight : 1080;
+  //debouncing - windowWidth, baseSize
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
 
-  const baseSize = useMemo(() => {
-    if (windowWidth < 540) return 150; //phone
-    if (windowWidth < 1024) return 200; //tablet
-    return 300; //desktop
-  }, [windowWidth]);
+    const handleResize = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const width = window.innerWidth;
+        setWindowWidth(width);
+        setWindowHeight(window.innerHeight);
+
+        if (width < 540) setBaseSize(150);
+        else if (width < 1024) setBaseSize(200);
+        else setBaseSize(300);
+      }, 200);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
 
   const xLimit = useMemo(() => {
     if (baseSize === 150) return 540;
@@ -35,19 +55,28 @@ const Letters: React.FC<LettersProps> = ({ data, onClick }) => {
 
   const yLimit = useMemo(() => windowHeight, [windowHeight]);
 
+  // mapping - data, gradient
+  useEffect(() => {
+    setColoredData(
+      data.map((letter) => ({
+        id: letter.id,
+        color:
+          GradientColors[Math.floor(Math.random() * GradientColors.length)],
+      })),
+    );
+  }, [data]);
+
   return (
     <div className="absolute inset-0 z-20 overflow-hidden">
-      {data.map((letter) => (
+      {coloredData.map(({ id, color }) => (
         <RandomComp
-          key={letter.id}
-          id={letter.id}
+          key={`${id}-${baseSize}`}
+          id={id}
           baseSize={baseSize}
           xLimit={xLimit}
           yLimit={yLimit}
-          gradient={
-            GradientColors[Math.floor(Math.random() * GradientColors.length)]
-          }
-          onClick={handleButtonClick}
+          gradient={color}
+          onClick={onClick}
         />
       ))}
     </div>

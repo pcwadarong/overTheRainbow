@@ -32,3 +32,9 @@ export interface FormProps extends LetterProps {
   createdDate: string;
   contact: string | null;
 }
+
+export interface PositionProps {
+  x: number;
+  y: number;
+  size: number;
+}
