@@ -33,15 +33,13 @@ const renderAuroraLayer = ({
 const AuroraBackground = () => {
   return (
     <main
-      className="relative w-screen h-screen flex justify-center items-center bg-green transition-bg"
+      className="absolute inset-0 flex justify-center items-center bg-green overflow-hidden"
       role="img"
       aria-label="Animated aurora background"
     >
-      <motion.div className="absolute inset-0 overflow-hidden">
-        {auroraAnimationConfigs.map((props, index) => (
-          <div key={index}>{renderAuroraLayer(props)}</div>
-        ))}
-      </motion.div>
+      {auroraAnimationConfigs.map((props, index) => (
+        <div key={index}>{renderAuroraLayer(props)}</div>
+      ))}
     </main>
   );
 };
