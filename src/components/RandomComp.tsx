@@ -40,7 +40,7 @@ const RandomComp = memo(
 
     const { x, y } = positionRef.current;
 
-    // ✅ 랜덤 duration 값 useMemo로 생성
+    // ✅ 랜덤 duration 값 useRef로 생성
     const randomDuration = useRef(Math.random() * 4 + 8).current;
 
     return (
