@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import CancelBtn from './../assets/Cancel.svg';
 import FormContent from './FormContent';
 import ImageUploadForm from './ImageUploadForm';
 import LetterContent from './LetterContent';
@@ -50,7 +49,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
           className="absolute right-8 top-8 text-3xl text-gray hover:text-dark p-4 -m-4"
           aria-label="닫기"
         >
-          <img src={CancelBtn} alt="x" />
+          &times;
         </button>
 
         <div className="mt-10 w-full flex flex-col items-center justify-center gap-8">

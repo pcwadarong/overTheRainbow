@@ -1,52 +1,55 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 
 import CloudIcon from '../assets/Cloud.svg';
 import CodeIcon from '../assets/Code.svg';
 import HeartIcon from '../assets/Heart.svg';
 import InstagramIcon from '../assets/Instagram.svg';
 import WriteIcon from '../assets/Write.svg';
+import useIsTouchDevice from '../hooks/useIsTouchDevice';
 
 const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
+  const isMobile = useIsTouchDevice();
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useLayoutEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const mediaQuery = window.matchMedia('(pointer: coarse)');
-    setIsMobile(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
-  }, []);
-
-  const handleTouchStart = useCallback(() => {
-    setIsHovered((prev) => !prev);
-  }, []);
+  const NAV_ITEMS = [
+    {
+      type: 'button',
+      icon: WriteIcon,
+      label: 'Write a letter',
+      onClick: onOpen,
+    },
+    {
+      type: 'link',
+      href: 'https://www.behance.net/gallery/224587611/Over-the-Rainbow',
+      icon: HeartIcon,
+      label: 'Behance',
+    },
+    {
+      type: 'link',
+      href: 'https://www.instagram.com/chaendraw/',
+      icon: InstagramIcon,
+      label: 'Instagram',
+    },
+    {
+      type: 'link',
+      href: 'https://github.com/pcwadarong/overTheRainbow',
+      icon: CodeIcon,
+      label: 'GitHub',
+    },
+  ];
 
   return (
     <nav
       className="bg-white bg-opacity-50 p-2 md:p-4 absolute top-4 start-4 md:top-8 md:start-8 z-30 rounded-2xl md:rounded-3xl backdrop-blur-2xl"
-      onMouseEnter={!isMobile ? handleMouseEnter : undefined}
-      onMouseLeave={!isMobile ? handleMouseLeave : undefined}
-      onTouchStart={isMobile ? handleTouchStart : undefined}
+      onMouseEnter={!isMobile ? () => setIsHovered(true) : undefined}
+      onMouseLeave={!isMobile ? () => setIsHovered(false) : undefined}
+      onTouchStart={isMobile ? () => setIsHovered((prev) => !prev) : undefined}
     >
-      <button type="button" className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}>
+      <button
+        type="button"
+        aria-label="Open navigation menu"
+        className={`${isHovered ? 'mb-4 md:m-0' : 'm-0'}`}
+      >
         <img
           src={CloudIcon}
           alt="Cloud Icon"
@@ -62,54 +65,36 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
         }`}
       >
         <li className="border-b border-b-nav w-full" />
-        <li>
-          <button type="button" onClick={onOpen}>
-            <img
-              src={WriteIcon}
-              alt="Write Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </button>
-        </li>
-        <li>
-          <a
-            href="https://www.behance.net/gallery/224587611/Over-the-Rainbow"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={HeartIcon}
-              alt="Heart Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.instagram.com/chaendraw/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={InstagramIcon}
-              alt="Instagram Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/pcwadarong/overTheRainbow"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={CodeIcon}
-              alt="Code Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
+        {NAV_ITEMS.map((item, index) => (
+          <li key={index}>
+            {item.type === 'button' ? (
+              <button
+                type="button"
+                onClick={item.onClick}
+                aria-label={item.label}
+              >
+                <img
+                  src={item.icon}
+                  alt={`${item.label} Icon`}
+                  className="w-6 h-6 md:w-8 md:h-8"
+                />
+              </button>
+            ) : (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+              >
+                <img
+                  src={item.icon}
+                  alt={`${item.label} Icon`}
+                  className="w-6 h-6 md:w-8 md:h-8"
+                />
+              </a>
+            )}
+          </li>
+        ))}
       </ul>
     </nav>
   );
