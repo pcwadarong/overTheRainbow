@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { GradientProps, LetterProps } from '../types';
+import { GradientProps, LetterProps, PositionProps } from '../types';
 import { GradientColors } from './../constants/gradientColors';
 import RandomComp from './RandomComp';
 
@@ -55,6 +55,9 @@ const Letters: React.FC<LettersProps> = ({ data, onClick }) => {
 
   const yLimit = useMemo(() => windowHeight, [windowHeight]);
 
+  // 전체 아이콘의 위치를 모아둔 배열
+  const positions = useRef<PositionProps[]>([]);
+
   // mapping - data, gradient
   useEffect(() => {
     setColoredData(
@@ -77,6 +80,7 @@ const Letters: React.FC<LettersProps> = ({ data, onClick }) => {
           yLimit={yLimit}
           gradient={color}
           onClick={onClick}
+          positions={positions.current}
         />
       ))}
     </div>

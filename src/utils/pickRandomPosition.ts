@@ -1,35 +1,72 @@
 import { PositionProps } from '../types';
 
-export const pickRandomPosition = (
+function isOverlapping(
+  x: number,
+  y: number,
+  positions: PositionProps[],
+  minDistance: number,
+): boolean {
+  return positions.some((pos) => {
+    const dx = pos.x - x;
+    const dy = pos.y - y;
+    return dx * dx + dy * dy < minDistance * minDistance;
+  });
+}
+
+export function pickIconPosition(
   baseSize: number,
   maxWidth: number,
   maxHeight: number,
-  minDistance: number,
   positions: PositionProps[],
-) => {
-  let x: number, y: number, size: number;
-  let attempts = 0;
-  const maxAttempts = 30; // 최대 30번 시도
+  minDistance: number,
+  maxAttempts = 30,
+): PositionProps {
   const variance = baseSize === 300 ? 100 : 50;
 
-  do {
-    size = baseSize + Math.floor(Math.random() * (variance * 2 + 1)) - variance;
-    x = Math.random() * (maxWidth - size);
-    y = Math.random() * (maxHeight - size);
+  for (let i = 0; i < maxAttempts; i++) {
+    const size =
+      baseSize + Math.floor(Math.random() * (variance * 2 + 1)) - variance;
+    const x = Math.random() * (maxWidth - size);
+    const y = Math.random() * (maxHeight - size);
 
-    const isTooClose = positions.some((pos) => {
-      const dx = pos.x - x;
-      const dy = pos.y - y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+    if (!isOverlapping(x, y, positions, minDistance)) {
+      const pos = { x, y, size };
+      positions.push(pos);
+      return pos;
+    }
+  }
 
-      return distance < minDistance;
-    });
+  const pos = {
+    x: Math.random() * (maxWidth - baseSize),
+    y: Math.random() * (maxHeight - baseSize),
+    size: baseSize,
+  };
+  positions.push(pos);
+  return pos;
+}
 
-    if (!isTooClose) break;
+export function pickSparklePosition(
+  xMax: number,
+  yMax: number,
+  positions: PositionProps[],
+  minDistance: number,
+  maxAttempts = 100,
+): PositionProps {
+  for (let i = 0; i < maxAttempts; i++) {
+    const x = Math.random() * xMax;
+    const y = Math.random() * yMax;
 
-    attempts++;
-  } while (attempts < maxAttempts);
+    if (!isOverlapping(x, y, positions, minDistance)) {
+      const pos = { x, y };
+      positions.push(pos);
+      return pos;
+    }
+  }
 
-  positions.push({ x, y, size });
-  return { x, y, size };
-};
+  const pos = {
+    x: Math.random() * xMax,
+    y: Math.random() * yMax,
+  };
+  positions.push(pos);
+  return pos;
+}

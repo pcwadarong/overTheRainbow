@@ -1,69 +1,64 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+
+import { PositionProps } from '../../types';
+import { pickSparklePosition } from '../../utils/pickRandomPosition';
+
+const getRandomSize = (min: number, max: number) =>
+  Math.random() * (max - min) + min;
+
+// x일 경우, 3가지 선을 각각 만드는 함수
+const createLine = (starSize: number, rotation: string) => {
+  const line = document.createElement('div');
+  line.classList.add('absolute', 'bg-white', 'opacity-80');
+  line.style.width = `${starSize}px`;
+  line.style.height = '1px';
+  line.style.transform = `rotate(${rotation})`;
+  line.style.top = '50%';
+  line.style.left = '50%';
+  return line;
+};
+
+const appendSparkle = (
+  container: HTMLElement,
+  shape: 'circle' | 'x',
+  x: number,
+  y: number,
+) => {
+  const sparkle = document.createElement('div');
+  sparkle.classList.add('absolute');
+  sparkle.style.left = `${x}px`;
+  sparkle.style.top = `${y}px`;
+
+  if (shape === 'circle') {
+    const circleSize = getRandomSize(4, 14);
+    sparkle.classList.add('rounded-full', 'bg-white', 'opacity-80');
+    sparkle.style.width = `${circleSize}px`;
+    sparkle.style.height = `${circleSize}px`;
+  } else {
+    const starSize = getRandomSize(2, 22);
+    sparkle.classList.add('opacity-80');
+    sparkle.appendChild(createLine(starSize, '45deg'));
+    sparkle.appendChild(createLine(starSize, '-45deg'));
+    sparkle.appendChild(createLine(starSize, '90deg'));
+  }
+
+  container.appendChild(sparkle);
+};
 
 const Sparkles: React.FC = () => {
+  const positions = useRef<PositionProps[]>([]);
+
   useEffect(() => {
     const createSparkles = () => {
       const numberOfSparkles = 50;
-      const container = document.getElementById(
-        'sparkle-container',
-      ) as HTMLElement;
+      const container = document.getElementById('sparkle-container');
+      if (!container) return;
 
       for (let i = 0; i < numberOfSparkles; i++) {
-        const randomShape = Math.random() > 0.3 ? 'circle' : 'x';
+        const randomShape = Math.random() > 0.4 ? 'circle' : 'x';
+        const { x, y } = pickSparklePosition(2000, 2000, positions.current, 15);
 
-        const sparkle = document.createElement('div');
-        sparkle.classList.add('absolute');
-
-        // 랜덤 크기와 위치 지정
-        const circleSize = Math.random() * 10 + 4;
-        const starSize = Math.random() * 20 + 2;
-        const xPosition = Math.random() * 2000;
-        const yPosition = Math.random() * 2000;
-
-        // 스타일 적용
-        sparkle.style.left = `${xPosition}px`;
-        sparkle.style.top = `${yPosition}px`;
-
-        if (randomShape === 'circle') {
-          sparkle.classList.add('rounded-full', 'bg-white', 'opacity-80');
-          sparkle.style.width = `${circleSize}px`;
-          sparkle.style.height = `${circleSize}px`;
-        } else {
-          sparkle.classList.add('opacity-80');
-
-          // 선 3개 생성
-          const line1 = document.createElement('div');
-          const line2 = document.createElement('div');
-          const line3 = document.createElement('div');
-
-          // 선의 스타일을 설정하여 X 모양을 만든다
-          [line1, line2, line3].forEach((line) => {
-            line.classList.add('absolute', 'bg-white', 'opacity-80');
-            line.style.width = `${starSize}px`;
-            line.style.height = '1px';
-          });
-
-          // 선 회전 설정
-          line1.style.transform = 'rotate(45deg)';
-          line2.style.transform = 'rotate(-45deg)';
-          line3.style.transform = 'rotate(90deg)'; // 가로선 추가
-
-          // 선 위치 설정
-          line1.style.top = '50%';
-          line1.style.left = '50%';
-          line2.style.top = '50%';
-          line2.style.left = '50%';
-          line3.style.top = '50%';
-          line3.style.left = '50%';
-
-          // 부모에 선들을 추가
-          sparkle.appendChild(line1);
-          sparkle.appendChild(line2);
-          sparkle.appendChild(line3);
-        }
-
-        // 최종적으로 부모 요소에 추가
-        container.appendChild(sparkle);
+        appendSparkle(container, randomShape, x, y);
       }
     };
 

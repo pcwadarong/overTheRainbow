@@ -2,9 +2,8 @@ import { memo, useMemo, useRef } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { PositionProps } from '../types';
 import { LetterBtnProps } from '../types';
-import { pickRandomPosition } from '../utils/pickRandomPosition';
+import { pickIconPosition } from '../utils/pickRandomPosition';
 import CircleIcon from './shapes/Circle';
 import CloudIcon from './shapes/Cloud';
 import HeartIcon from './shapes/Heart';
@@ -13,7 +12,15 @@ import StarIcon from './shapes/Star';
 const ICON_COMPONENTS = [CircleIcon, HeartIcon, StarIcon, CloudIcon] as const;
 
 const RandomComp = memo(
-  ({ id, baseSize, xLimit, yLimit, gradient, onClick }: LetterBtnProps) => {
+  ({
+    id,
+    baseSize,
+    xLimit,
+    yLimit,
+    gradient,
+    onClick,
+    positions,
+  }: LetterBtnProps) => {
     // IconComponent는 첫 렌더링 시 한 번만 선택되도록 설정
     const IconComponent = useMemo(() => {
       return ICON_COMPONENTS[Math.floor(Math.random() * 4)];
@@ -22,19 +29,18 @@ const RandomComp = memo(
     // 크기와 위치 값을 처음 렌더링 시에만 계산하도록 useRef로 저장
     const sizeRef = useRef<number | null>(null);
     const positionRef = useRef<{ x: number; y: number } | null>(null);
-    const positions = useRef<PositionProps[]>([]).current;
 
     // 아이콘 크기, 좌표 설정 (페이지 새로고침 시에만 랜덤 값 적용)
     if (sizeRef.current === null || positionRef.current === null) {
-      const { x, y, size } = pickRandomPosition(
+      const { x, y, size } = pickIconPosition(
         baseSize,
         xLimit,
         yLimit,
-        300,
         positions,
+        300,
       );
 
-      sizeRef.current = size;
+      sizeRef.current = size!;
       positionRef.current = { x, y };
     }
 

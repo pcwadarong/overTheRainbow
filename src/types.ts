@@ -20,6 +20,7 @@ export interface LetterBtnProps {
   yLimit: number;
   gradient: GradientProps;
   onClick: (id: string) => void;
+  positions: PositionProps[];
 }
 
 export interface LetterProps {
@@ -36,5 +37,5 @@ export interface FormProps extends LetterProps {
 export interface PositionProps {
   x: number;
   y: number;
-  size: number;
+  size?: number;
 }

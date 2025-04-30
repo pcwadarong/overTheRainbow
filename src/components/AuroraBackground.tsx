@@ -30,18 +30,16 @@ const renderAuroraLayer = ({
   />
 );
 
-const AuroraBackground = () => {
-  return (
-    <main
-      className="absolute inset-0 flex justify-center items-center bg-green overflow-hidden"
-      role="img"
-      aria-label="Animated aurora background"
-    >
-      {auroraAnimationConfigs.map((props, index) => (
-        <div key={index}>{renderAuroraLayer(props)}</div>
-      ))}
-    </main>
-  );
-};
+const AuroraBackground = () => (
+  <main
+    className="absolute inset-0 flex justify-center items-center bg-green overflow-hidden"
+    role="img"
+    aria-label="Animated aurora background"
+  >
+    {auroraAnimationConfigs.map((props, index) => (
+      <div key={index}>{renderAuroraLayer(props)}</div>
+    ))}
+  </main>
+);
 
 export default AuroraBackground;
