@@ -61,54 +61,36 @@ const Navigation: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
         }`}
       >
         <li className="border-b border-b-nav w-full" />
-        <li>
-          <button type="button" onClick={onOpen}>
-            <img
-              src={WriteIcon}
-              alt="Write Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </button>
-        </li>
-        <li>
-          <a
-            href="https://www.behance.net/gallery/224587611/Over-the-Rainbow"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={HeartIcon}
-              alt="Heart Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.instagram.com/chaendraw/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={InstagramIcon}
-              alt="Instagram Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/pcwadarong/overTheRainbow"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={CodeIcon}
-              alt="Code Icon"
-              className="w-6 h-6 md:w-8 md:h-8"
-            />
-          </a>
-        </li>
+        {NAV_ITEMS.map((item, index) => (
+          <li key={index}>
+            {item.type === 'button' ? (
+              <button
+                type="button"
+                onClick={item.onClick}
+                aria-label={item.label}
+              >
+                <img
+                  src={item.icon}
+                  alt={`${item.label} Icon`}
+                  className="w-6 h-6 md:w-8 md:h-8"
+                />
+              </button>
+            ) : (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+              >
+                <img
+                  src={item.icon}
+                  alt={`${item.label} Icon`}
+                  className="w-6 h-6 md:w-8 md:h-8"
+                />
+              </a>
+            )}
+          </li>
+        ))}
       </ul>
     </nav>
   );

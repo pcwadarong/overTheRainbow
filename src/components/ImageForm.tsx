@@ -1,13 +1,14 @@
 import imageCompression from 'browser-image-compression';
+import { useMemo } from 'react';
 
 import ImageBtn from './../assets/image.svg';
 
-interface ImageUploadFormProps {
+interface ImageFormProps {
   image: File | null;
   setImage: (image: File) => void;
 }
 
-const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
+const ImageForm = ({ image, setImage }: ImageFormProps) => {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -24,6 +25,10 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
     }
   };
 
+  const previewUrl = useMemo(() => {
+    return image ? URL.createObjectURL(image) : '';
+  }, [image]);
+
   return (
     <div className="relative w-40 h-40">
       <label
@@ -32,7 +37,7 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
       >
         {image ? (
           <img
-            src={URL.createObjectURL(image)}
+            src={previewUrl}
             alt="Uploaded preview"
             className="w-full h-full object-cover"
           />
@@ -51,4 +56,4 @@ const ImageUploadForm = ({ image, setImage }: ImageUploadFormProps) => {
   );
 };
 
-export default ImageUploadForm;
+export default ImageForm;

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import AuroraBackground from './components/AuroraBackground';
 import Letters from './components/Letters';
-import Modals from './components/Modal';
+import ModalShell from './components/ModalShell';
 import Navigation from './components/Navigation';
 import Sparkles from './components/shapes/Sparkles';
 import { firestore } from './firebase/firebaseConfig';
@@ -62,7 +62,7 @@ const App = () => {
       <AuroraBackground />
 
       {isOpened && (
-        <Modals
+        <ModalShell
           type={selectedLetter ? 'LETTER' : 'FORM'}
           data={data}
           id={selectedLetter}

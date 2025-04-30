@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import FormContent from './FormContent';
-import ImageUploadForm from './ImageUploadForm';
-import LetterContent from './LetterContent';
+import FormModalContent from './FormModalContent';
+import LetterContent from './LetterModalContent';
 import { LetterProps } from '../types';
 
 interface ModalProps {
@@ -12,19 +11,13 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modals = ({ type, data, id, onClose }: ModalProps) => {
+const ModalsShell = ({ type, data, id, onClose }: ModalProps) => {
   const letter = data.find((letter) => letter.id === id);
-  const [image, setImage] = useState<File | null>(null);
-  const [letterContent, setLetterContent] = useState('');
-  const [contact, setContact] = useState('');
+  const [isDirty, setIsDirty] = useState(false);
 
   const handleClose = () => {
-    if (
-      (letterContent || contact || image) &&
-      !confirm('작성하신 내용이 삭제됩니다. 나가시겠습니까?')
-    ) {
+    if (isDirty && !confirm('작성하신 내용이 삭제됩니다. 나가시겠습니까?'))
       return;
-    }
     onClose();
   };
 
@@ -46,7 +39,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
       >
         <button
           onClick={handleClose}
-          className="absolute right-8 top-8 text-3xl text-gray hover:text-dark p-4 -m-4"
+          className="absolute right-8 top-8 p-3 -m-3 text-3xl text-gray hover:text-pink focus:text-pink"
           aria-label="닫기"
         >
           &times;
@@ -56,17 +49,7 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
           {type === 'LETTER' && letter ? (
             <LetterContent letter={letter} id={id} />
           ) : (
-            <>
-              <ImageUploadForm image={image} setImage={setImage} />
-              <FormContent
-                onClose={onClose}
-                image={image}
-                letterContent={letterContent}
-                setLetterContent={setLetterContent}
-                contact={contact}
-                setContact={setContact}
-              />
-            </>
+            <FormModalContent onClose={onClose} setIsDirty={setIsDirty} />
           )}
         </div>
       </div>
@@ -74,4 +57,4 @@ const Modals = ({ type, data, id, onClose }: ModalProps) => {
   );
 };
 
-export default Modals;
+export default ModalsShell;

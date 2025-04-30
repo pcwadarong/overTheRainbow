@@ -1,11 +1,11 @@
 import { LetterProps } from '../types';
 
-interface LetterContentProps {
+interface LetterModalContentProps {
   letter: LetterProps;
   id: string | null;
 }
 
-const LetterContent = ({ letter, id }: LetterContentProps) => (
+const LetterModalContent = ({ letter, id }: LetterModalContentProps) => (
   <>
     {letter.imageURL && (
       <div className="w-56 h-56 border-2 overflow-hidden border-neutral-100 rounded-full">
@@ -16,4 +16,4 @@ const LetterContent = ({ letter, id }: LetterContentProps) => (
   </>
 );
 
-export default LetterContent;
+export default LetterModalContent;
